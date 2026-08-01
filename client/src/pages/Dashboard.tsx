@@ -6,7 +6,7 @@ import {
   Share2Icon,
   TrendingUpIcon,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../api/axios";
 
 function Dashboard() {
@@ -113,7 +113,7 @@ function Dashboard() {
           </div>
         ) : (
           <div className="divide-y divide-slate-50">
-            {activities.map((activity) => (
+            {activities.map((activity: any) => (
               <div
                 key={activity._id}
                 className="flex items-start gap-4 px-6 py-4 hover:bg-slate-50/50 transition-colors"

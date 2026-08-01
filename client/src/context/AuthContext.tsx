@@ -1,12 +1,5 @@
-import React, {
-  Children,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/axios";
-
 
 interface User {
   _id: string;

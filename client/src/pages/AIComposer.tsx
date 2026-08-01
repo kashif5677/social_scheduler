@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { dummyGenerationData, PLATFORMS } from "../assets/assets";
+import { PLATFORMS } from "../assets/assets";
 import {
   ArrowRightIcon,
   CalendarIcon,
   ClockIcon,
   HistoryIcon,
   Loader2Icon,
-  Target,
   TimerIcon,
   Wand2Icon,
   XIcon,
