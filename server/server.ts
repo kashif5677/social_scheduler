@@ -16,10 +16,11 @@ const app = express();
 await connectDB();
 
 // Middleware
-const allowedOrigins = (process.env.VITE_API_BASE_URL || "")
+const allowedOrigins = (process.env.CLIENT_URLS || "")
   .split(",")
   .map((url) => url.trim())
   .filter(Boolean);
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -56,15 +57,6 @@ app.use("/api/activity", activityRouter);
 // Initialize Scheduler
 initScheduler();
 
-// Global Error Handler
-app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  console.error("GLOBAL ERROR:", err);
-
-  res.status(500).json({
-    message: err?.response?.data?.message || err?.message,
-  });
-});
-
 app.get("/test-cloudinary", async (req, res) => {
   try {
     const result = await cloudinary.api.ping();
@@ -73,6 +65,15 @@ app.get("/test-cloudinary", async (req, res) => {
     console.error(err);
     res.status(500).json(err);
   }
+});
+
+// Global Error Handler — must stay last
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error("GLOBAL ERROR:", err);
+
+  res.status(500).json({
+    message: err?.response?.data?.message || err?.message,
+  });
 });
 
 app.listen(port, () => {
