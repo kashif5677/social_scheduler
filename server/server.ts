@@ -16,12 +16,23 @@ const app = express();
 await connectDB();
 
 // Middleware
+const allowedOrigins = (process.env.VITE_API_BASE_URL || "")
+  .split(",")
+  .map((url) => url.trim())
+  .filter(Boolean);
 app.use(
   cors({
-    origin: process.env.VITE_API_BASE_URL, // your live frontend URL
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
+
 app.use(express.json());
 
 // ================= DEBUG LOGGER =================
