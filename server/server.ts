@@ -16,12 +16,16 @@ const app = express();
 await connectDB();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.VITE_API_BASE_URL, // your live frontend URL
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // ================= DEBUG LOGGER =================
 app.use((req: Request, res: Response, next: NextFunction) => {
-
   next();
 });
 // ================================================

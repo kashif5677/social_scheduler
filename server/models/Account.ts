@@ -24,7 +24,7 @@ const accountSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["connected", "disconnected"],
-      default: "conected",
+      default: "connected",
     },
     avatarUrl: { type: String },
   },
