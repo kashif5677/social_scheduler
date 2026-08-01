@@ -1,6 +1,7 @@
 import zernio from "../config/zernio.js";
 import { AuthRequest } from "../middlewares/auth.middleware.js";
 import { Account } from "../models/Account.js";
+import { Response } from "express";
 
 //Get all accounts
 //GET /api/accounts
