@@ -17,8 +17,9 @@ export const initScheduler = () => {
       console.log(`Found ${postsToPublish.length} scheduled post(s).`);
 
       for (const post of postsToPublish) {
+        let accounts: InstanceType<typeof Account>[] = [];
         try {
-          const accounts = await Account.find({
+          accounts = await Account.find({
             user: post.user,
             platform: { $in: post.platforms },
             status: "connected",
@@ -46,7 +47,6 @@ export const initScheduler = () => {
             accountId: acc.zernioAccountId!,
           }));
 
-     
           const payload = {
             content: post.content,
             publishNow: true,
